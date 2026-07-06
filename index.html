@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>冷敷治疗仪 — VIBOFROST</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="description" content="VIBOFROST Cold Therapy Machine quick start guide — setup instructions, FAQs, and official accessories.">
+  <title>Cold Therapy Machine — VIBOFROST</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -11,344 +12,497 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
       background: #0f0f0f;
       color: #e0e0e0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       min-height: 100vh;
       min-height: 100dvh;
-      padding: 20px;
       position: relative;
-      overflow: hidden;
+      touch-action: manipulation;
     }
     body::before {
       content: '';
       position: fixed;
       top: -20px; left: -20px; right: -20px; bottom: -20px;
-      background: url('背景.jpg') center/cover no-repeat;
+      background: url('background.jpg') center/cover no-repeat;
       filter: blur(6px) brightness(0.45);
       z-index: -1;
     }
 
-    /* ===== Loading Screen ===== */
-    .loading-screen {
-      text-align: center;
-      animation: fadeOut 0.3s 1.2s ease-out forwards;
-      pointer-events: none;
+    .page {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: calc(36px + env(safe-area-inset-top, 0px)) 20px calc(48px + env(safe-area-inset-bottom, 0px));
       position: relative;
-      z-index: 10;
-    }
-    @keyframes fadeOut {
-      to { opacity: 0; }
-    }
-    .spinner {
-      width: 44px; height: 44px;
-      border: 3px solid rgba(255,255,255,0.12);
-      border-top-color: #3b82f6;
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-      margin: 0 auto 20px;
-    }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    .loading-screen p {
-      font-size: 13px;
-      color: #6b7280;
-      letter-spacing: 0.5px;
-    }
-
-    /* ===== Main Card ===== */
-    .app {
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 70px 20px 20px;
       z-index: 1;
     }
-    .app-inner {
-      width: 100%;
-      max-width: 350px;
+
+    /* ===== Brand Header ===== */
+    .brand-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .brand-logo {
+      display: block;
+      width: 140px;
+      margin: 0 auto 8px;
+    }
+    .brand-tagline {
+      font-size: 12px;
+      color: #6b7280;
+      letter-spacing: 1px;
     }
 
-    /* ===== Security Header ===== */
-    .security-header {
+    /* ===== Video Section ===== */
+    .video-section {
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 28px;
+      background: #000;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+    }
+    .video-section video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+    }
+
+    /* ===== Section Card ===== */
+    .section {
+      background: #1a1a1a;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px;
+      padding: 24px 20px;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 4px;
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 16px;
-      padding: 0 4px;
     }
-    .shield-icon {
-      width: 22px; height: 22px;
-    }
-    .security-header span {
-      font-size: 13px;
-      font-weight: 600;
-      color: #9ca3af;
-      letter-spacing: 1px;
-      text-transform: uppercase;
+    .section-sub {
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 20px;
     }
 
-    /* ===== Card ===== */
-    .card {
-      background: #1a1a1a;
-      border: 1px solid #272727;
-      border-radius: 20px;
-      padding: 36px 28px 28px;
-      text-align: center;
+    /* ===== Quick Start Steps ===== */
+    .step-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
     }
-
-    .brand-logo {
-      display: block;
-      width: 160px;
-      margin: 0px auto 20px;
+    .step-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 14px 0;
     }
-
-    /* ===== Verification Result ===== */
-    .result-icon {
-      width: 80px; height: 80px;
+    .step-item + .step-item {
+      border-top: 1px solid #1f1f1f;
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 32px; height: 32px;
       border-radius: 50%;
-      background: linear-gradient(135deg, #064e3b, #065f46);
+      background: #3b82f6;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 16px;
-      animation: popIn 0.35s 1.2s ease-out both;
-      box-shadow: 0 0 40px rgba(5,150,105,0.15);
+      margin-top: 1px;
     }
-    @keyframes popIn {
-      0% { transform: scale(0); opacity: 0; }
-      65% { transform: scale(1.12); }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    .result-icon svg {
-      width: 38px; height: 38px;
-      animation: drawCheck 0.3s 1.4s ease-out both;
-    }
-    @keyframes drawCheck {
-      0% { stroke-dashoffset: 30; }
-      100% { stroke-dashoffset: 0; }
-    }
-    .result-icon svg polyline {
-      stroke-dasharray: 30;
-      stroke-dashoffset: 30;
-      animation: drawCheck 0.3s 1.4s ease-out forwards;
-    }
-
-    .result-title {
-      font-size: 22px;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 6px;
-      animation: fadeUp 0.4s 1.3s ease-out both;
-    }
-    .result-sub {
+    .step-text {
       font-size: 14px;
-      color: #6b7280;
+      color: #d1d5db;
       line-height: 1.6;
-      animation: fadeUp 0.4s 1.4s ease-out both;
-    }
-    @keyframes fadeUp {
-      0% { opacity: 0; transform: translateY(8px); }
-      100% { opacity: 1; transform: translateY(0); }
+      padding-top: 4px;
     }
 
-    /* ===== Divider ===== */
-    .divider {
+    /* ===== Inline Tips (inside Quick Start card) ===== */
+    .tips-divider {
       height: 1px;
-      background: #272727;
-      margin: 24px 0 20px;
-      animation: fadeUp 0.4s 1.5s ease-out both;
+      background: #1f1f1f;
+      margin: 8px 0 16px;
     }
-
-    /* ===== Product Info ===== */
-    .info-block {
+    .tips-label {
+      font-size: 11px;
+      color: #f59e0b;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+    .tip-inline {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      font-size: 12px;
+      color: #9ca3af;
+      line-height: 1.6;
+      padding: 6px 0;
+    }
+    .tip-dot {
+      flex-shrink: 0;
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: #f59e0b;
+      margin-top: 6px;
+    }
+    /* ===== FAQ Accordion ===== */
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+    }
+    .faq-item {
+      border-bottom: 1px solid #1f1f1f;
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: #d1d5db;
+      font-size: 14px;
+      font-weight: 600;
       text-align: left;
-      animation: fadeUp 0.4s 1.6s ease-out both;
-    }
-    .info-item {
+      padding: 16px 0;
+      cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 0;
+      gap: 12px;
+      font-family: inherit;
+      transition: transform 0.15s ease;
     }
-    .info-item + .info-item {
-      border-top: 1px solid #1f1f1f;
-    }
-    .info-key {
-      font-size: 12px;
-      color: #6b7280;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .info-val {
-      font-size: 13px;
-      color: #d1d5db;
-      font-weight: 500;
-      text-align: right;
-    }
-    .info-val.mono {
-      font-family: 'SF Mono', 'Menlo', 'Consolas', monospace;
-      font-size: 11px;
-      letter-spacing: 0.4px;
-      background: #111;
-      padding: 4px 10px;
-      border-radius: 6px;
-      color: #9ca3af;
-      max-width: 180px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .info-val.green {
-      color: #10b981;
-    }
-
-    /* ===== Action Area ===== */
-    .actions {
-      margin-top: 24px;
-      animation: fadeUp 0.4s 1.7s ease-out both;
-    }
-
-    .btn-primary {
-      display: block;
-      width: 100%;
-      padding: 15px 0;
-      background: #fff;
-      color: #0f0f0f;
-      font-size: 15px;
-      font-weight: 600;
-      text-decoration: none;
-      border-radius: 12px;
-      transition: all 0.2s;
-      border: none;
-      cursor: pointer;
-    }
-    .btn-primary:active {
-      background: #d4d4d4;
+    .faq-question:active {
       transform: scale(0.98);
     }
-
-    .link-row {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      margin-top: 14px;
+    .faq-arrow {
+      flex-shrink: 0;
+      width: 18px; height: 18px;
+      transition: transform 0.25s ease;
+      color: #6b7280;
     }
-    .link-row a {
+    .faq-item.open .faq-arrow {
+      transform: rotate(180deg);
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      font-size: 13px;
+      color: #9ca3af;
+      line-height: 1.7;
+      padding: 0;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+      padding: 0 0 16px;
+    }
+
+    /* ===== Accessories ===== */
+    .accessory-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .accessory-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 18px 16px;
+      background: #111;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 14px;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s ease;
+    }
+    .accessory-card:active {
+      border-color: #3b82f6;
+      background: #161616;
+      transform: scale(0.98);
+    }
+    .accessory-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #1e293b, #1a1a1a);
+      border: 1px solid #272727;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .accessory-icon svg {
+      width: 22px; height: 22px;
+    }
+    .accessory-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .accessory-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: #e0e0e0;
+      margin-bottom: 3px;
+    }
+    .accessory-hint {
       font-size: 12px;
+      color: #6b7280;
+      line-height: 1.5;
+    }
+    .accessory-arrow {
+      color: #3b82f6;
+      flex-shrink: 0;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .accessory-card:active .accessory-arrow {
+      opacity: 1;
+    }
+
+    /* ===== Footer Block ===== */
+    .footer-block {
+      margin-top: 8px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      text-align: center;
+    }
+    .footer-links {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-bottom: 16px;
+    }
+    .footer-links a {
+      color: #9ca3af;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-links a:active { color: #fff; }
+    .footer-links .sep {
+      margin: 0 8px;
+      color: #3f3f3f;
+    }
+    .footer-trust {
+      font-size: 14px;
+      color: #9ca3af;
+      margin-bottom: 8px;
+    }
+    .footer-trust strong {
+      color: #10b981;
+      font-weight: 700;
+    }
+    .footer-brand {
+      font-size: 11px;
+      color: #4b5563;
+    }
+    .footer-brand a {
       color: #6b7280;
       text-decoration: none;
-      transition: color 0.2s;
-    }
-    .link-row a:active { color: #fff; }
-
-    /* ===== Trust Badge ===== */
-    .trust-badge {
-      text-align: center;
-      margin-top: 20px;
-      font-size: 12px;
-      color: #9ca3af;
-      animation: fadeUp 0.4s 1.9s ease-out both;
-    }
-    .trust-badge span {
-      color: #10b981;
-    }
-
-    /* ===== Footer ===== */
-    .page-footer {
-      text-align: center;
-      margin-top: 10px;
-      font-size: 11px;
-      color: #6b7280;
-      animation: fadeUp 0.4s 2.0s ease-out both;
-    }
-    .page-footer span {
-      color: #9ca3af;
+      font-weight: 500;
     }
   </style>
 </head>
 <body>
 
-<!-- Loading Screen -->
-<div class="loading-screen" id="loadingScreen">
-  <div class="spinner"></div>
-  <p>正在验证安全码…</p>
-</div>
+<div class="page">
 
-<!-- Main App -->
-<div class="app">
-  <div class="app-inner">
+  <!-- Brand Header -->
+  <header class="brand-header">
+    <img class="brand-logo" src="logo.png" alt="VIBOFROST">
+    <p class="brand-tagline">Cold Therapy Machine · Quick Start Guide</p>
+  </header>
 
-    <!-- Security Header -->
-    <div class="security-header">
-      <svg class="shield-icon" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-      </svg>
-      <span>产品真伪验证</span>
-    </div>
-
-    <!-- Card -->
-    <div class="card">
-      <img class="brand-logo" src="logo.png" alt="VIBOFROST">
-
-      <div class="result-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="20 6 9 17 4 12"/>
-        </svg>
-      </div>
-
-      <div class="result-title">正品验证通过</div>
-      <div class="result-sub">
-        该安全码已验证为官方正品。<br>
-        您购买的是 VIBOFROST 官方授权产品。
-      </div>
-
-      <div class="divider"></div>
-
-      <div class="info-block">
-        <div class="info-item">
-          <span class="info-key">产品名称</span>
-          <span class="info-val green">冷敷治疗仪</span>
-        </div>
-        <div class="info-item">
-          <span class="info-key">验证状态</span>
-          <span class="info-val green">&#9679; 已验证</span>
-        </div>
-      </div>
-
-      <div class="actions">
-        <a class="btn-primary" href="方案B.html">
-          查看使用教程 &amp; 操作视频
-        </a>
-        <div class="link-row">
-          <a href="https://vibofrost.com/pages/1-year-warranty-policy">保修政策</a>
-          <a href="https://vibofrost.com/pages/contact">联系我们</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="trust-badge">
-      VIBOFROST 已服务 <span>10,000+</span> 康复用户
-    </div>
-
-    <div class="page-footer">
-      由 <span>ViboSecure</span> 提供安全验证
-    </div>
-
+  <!-- Video Section -->
+  <div class="video-section">
+    <video controls playsinline preload="metadata" poster="video-poster.jpg">
+      <source src="setup-guide.mp4" type="video/mp4">
+      Your browser does not support video playback.
+    </video>
   </div>
+
+  <!-- Quick Start + Tips -->
+  <section class="section">
+    <h2 class="section-title">Quick Start</h2>
+    <p class="section-sub">5-step setup — get running in minutes</p>
+    <ol class="step-list">
+      <li class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-text">Fill the cooler with water up to the minimum fill line, then add the frozen ice bottles.</div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-text">Fully submerge the pump, then close the zipper to help maintain the water temperature.</div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-text">Place a thin dry cloth between the therapy pad and your skin. Secure the pad with the strap — snug, not tight.</div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-text">Plug in the machine, then select your preferred timer and flow setting.</div>
+      </li>
+      <li class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-text">Place a towel or protective mat under the cooler to help keep surrounding surfaces dry.</div>
+      </li>
+    </ol>
+
+    <div class="tips-divider"></div>
+    <p class="tips-label">BEFORE FIRST USE</p>
+    <div class="tip-inline">
+      <span class="tip-dot"></span>
+      <span>Freeze six water bottles for at least 8 hours before use. For extended cooling, we recommend keeping a second set frozen and ready to swap.</span>
+    </div>
+    <div class="tip-inline">
+      <span class="tip-dot"></span>
+      <span>Always add water before turning on the pump. Never run the pump dry, as this may damage the motor.</span>
+    </div>
+    <div class="tip-inline">
+      <span class="tip-dot"></span>
+      <span>A typical session lasts 20–30 minutes, followed by a 10-minute break. Always follow your healthcare provider's recommendations.</span>
+    </div>
+    <div class="tip-inline">
+      <span class="tip-dot"></span>
+      <span>Condensation on the tubing is normal and does not indicate a leak. Place a towel or protective mat under the cooler to help keep surrounding surfaces dry.</span>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <h2 class="section-title">FAQ</h2>
+    <p class="section-sub">Quick answers to common questions</p>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Does this machine actively cool the water?
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">No. Instead of using a compressor, the VIBOFROST system circulates ice-cold water with pre-frozen water bottles. This design keeps the unit quieter, lighter, and easy to use wherever you recover.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          How long do the ice bottles stay cold?
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">Up to 6–8 hours, depending on room temperature, water level, and usage. For extended cooling, keep a second set of frozen water bottles ready to swap as needed.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Is condensation on the tubing normal?
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">Yes — this is completely normal. Cold water flowing through the tubing cools the outside surface, causing moisture from the air to condense (like a cold drink on a warm day). It is not a leak. Use the included mat under the machine and wipe down the tubing as needed.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          Can I run it continuously overnight?
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">Yes. Use the built-in timer and cycle settings to customize your therapy sessions based on your needs or your healthcare provider's recommendations. These settings help avoid prolonged cold exposure while providing consistent cold therapy.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What if the water isn't flowing?
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">Check the following:<br><br>
+        • Make sure the water level is above the minimum fill line.<br><br>
+        • Ensure the pump is fully submerged.<br><br>
+        • Check that the tubing is not kinked or pinched.<br><br>
+        • Make sure all hose connections are securely connected.<br><br>
+        • Turn the machine off and back on to restart water circulation.<br><br>
+        If the issue persists, please contact our support team for assistance.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Official Accessories & Support -->
+  <section class="section">
+    <h2 class="section-title">Official Accessories &amp; Support</h2>
+    <p class="section-sub">Genuine VIBOFROST parts for the best fit and performance</p>
+    <div class="accessory-grid">
+      <a class="accessory-card" href="https://vibofrost.com/products/cold-therapy-machine" target="_blank">
+        <div class="accessory-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" rx="1"/>
+            <rect x="14" y="3" width="7" height="7" rx="1"/>
+            <rect x="3" y="14" width="7" height="7" rx="1"/>
+            <rect x="14" y="14" width="7" height="7" rx="1"/>
+          </svg>
+        </div>
+        <div class="accessory-info">
+          <div class="accessory-name">Shop Accessories</div>
+          <div class="accessory-hint">Replacement pads, ice bottles, tubing &amp; more</div>
+        </div>
+        <svg class="accessory-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+      <a class="accessory-card" href="https://vibofrost.com/pages/1-year-warranty-policy" target="_blank">
+        <div class="accessory-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <div class="accessory-info">
+          <div class="accessory-name">Warranty Policy</div>
+          <div class="accessory-hint">1-year coverage details &amp; claim process</div>
+        </div>
+        <svg class="accessory-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+      <a class="accessory-card" href="https://vibofrost.com/pages/contact" target="_blank">
+        <div class="accessory-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+        </div>
+        <div class="accessory-info">
+          <div class="accessory-name">Contact Support</div>
+          <div class="accessory-hint">Reach our team — we're happy to help</div>
+        </div>
+        <svg class="accessory-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-block">
+    <p class="footer-trust">
+      Trusted by <strong>10,000+</strong> users
+    </p>
+    <p class="footer-brand">
+      Powered by <a href="https://vibofrost.com/">ViboSecure</a>
+    </p>
+    <p style="font-size:10px;color:#4b5563;margin-top:14px;line-height:1.6;">
+      The VIBOFROST Cold Therapy Machine is designed for cold therapy support. It is not a substitute for professional medical advice. Stop use and consult your healthcare provider if you experience numbness, pain, or unusual skin changes.
+    </p>
+  </footer>
+
 </div>
 
 <script>
-  (function() {
-    // Remove loading screen after animation completes
-    setTimeout(function() {
-      var ls = document.getElementById('loadingScreen');
-      if (ls) ls.style.display = 'none';
-    }, 1500);
-  })();
+  function toggleFaq(btn) {
+    var item = btn.parentElement;
+    var isOpen = item.classList.contains('open');
+
+    // Close all
+    document.querySelectorAll('.faq-item.open').forEach(function(el) {
+      el.classList.remove('open');
+    });
+
+    // Toggle clicked
+    if (!isOpen) {
+      item.classList.add('open');
+    }
+  }
 </script>
 
 </body>
