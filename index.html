@@ -200,8 +200,38 @@
       padding: 0;
     }
     .faq-item.open .faq-answer {
-      max-height: 300px;
       padding: 0 0 16px;
+    }
+
+    /* ===== FAQ Step List (numbered instructions) ===== */
+    .faq-step {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 5px 0;
+    }
+    .faq-num {
+      flex-shrink: 0;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: #3b82f6;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+    .drain-note {
+      margin-top: 14px;
+      padding: 10px 12px;
+      background: rgba(245, 158, 11, 0.04);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.6;
+      color: #d1d5db;
     }
 
     /* ===== Accessories ===== */
@@ -406,21 +436,47 @@
           Can I run it continuously overnight?
           <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
-        <div class="faq-answer">Yes. Use the built-in timer and cycle settings to customize your therapy sessions based on your needs or your healthcare provider's recommendations. These settings help avoid prolonged cold exposure while providing consistent cold therapy.</div>
+        <div class="faq-answer">Yes. Use the built-in timer and cycle settings to customize your therapy sessions based on your needs or your healthcare provider's recommendations.<br><br>
+        These settings help avoid prolonged cold exposure while providing consistent cold therapy.</div>
       </div>
 
       <div class="faq-item">
         <button class="faq-question" onclick="toggleFaq(this)">
-          What if the water isn't flowing?
+          Water Drainage Guide
           <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
-        <div class="faq-answer">Check the following:<br><br>
-        • Make sure the water level is above the minimum fill line.<br><br>
-        • Ensure the pump is fully submerged.<br><br>
-        • Check that the tubing is not kinked or pinched.<br><br>
-        • Make sure all hose connections are securely connected.<br><br>
-        • Turn the machine off and back on to restart water circulation.<br><br>
-        If the issue persists, please contact our support team for assistance.</div>
+        <div class="faq-answer">
+          <div class="faq-step"><span class="faq-num">1</span><span>While the machine is still running, raise the therapy pad above the cooler, then lift the pump out of the water.</span></div>
+          <div class="faq-step"><span class="faq-num">2</span><span>Keep the machine running to drain the remaining water from the tubing and therapy pad.</span></div>
+          <div class="faq-step"><span class="faq-num">3</span><span>When the <strong>water-drop icon</strong> appears on the controller (typically within about <strong>60 seconds</strong>), turn off the system using the controller.</span></div>
+          <div class="faq-step"><span class="faq-num">4</span><span>Allow any remaining water to drain out, wipe away any remaining moisture from the tubing and therapy pad, then store the system in a clean, dry place.</span></div>
+          <div class="drain-note"><strong>Important:</strong> Do not run the pump out of water during normal use. Only operate it out of water briefly when following this drainage procedure.</div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What if the pump is running but water isn't flowing?
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-step"><span class="faq-num">1</span><span>Make sure the water level is above the minimum fill line.</span></div>
+          <div class="faq-step"><span class="faq-num">2</span><span>Ensure the pump is fully submerged.</span></div>
+          <div class="faq-step"><span class="faq-num">3</span><span>Check that the tubing is not kinked or pinched.</span></div>
+          <div class="faq-step"><span class="faq-num">4</span><span>Make sure all hose connections are securely connected.</span></div>
+          <div class="faq-step"><span class="faq-num">5</span><span>Turn the machine off and back on to restart water circulation.</span></div>
+          <p style="margin:10px 0 0;">If the issue persists, please contact our support team for assistance.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          What if the pump isn't running?
+          <svg class="faq-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-answer">Disconnect the controller and connect the pump directly to the power adapter.<br><br>
+        If the pump runs, the pump is working properly.<br><br>
+        Please let us know the test result, and we'll help you resolve the issue as quickly as possible.</div>
       </div>
 
     </div>
@@ -491,16 +547,21 @@
 <script>
   function toggleFaq(btn) {
     var item = btn.parentElement;
+    var answer = item.querySelector('.faq-answer');
     var isOpen = item.classList.contains('open');
 
     // Close all
     document.querySelectorAll('.faq-item.open').forEach(function(el) {
       el.classList.remove('open');
+      el.querySelector('.faq-answer').style.maxHeight = '0px';
     });
 
     // Toggle clicked
-    if (!isOpen) {
+    if (isOpen) {
+      answer.style.maxHeight = '0px';
+    } else {
       item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
     }
   }
 </script>
